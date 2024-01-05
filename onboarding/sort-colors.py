@@ -1,15 +1,20 @@
+from typing import List
+
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-  
-        for i in range(len(nums)):
-            min_index = i
-            
-            for j in range(i + 1, len(nums)):
-                
-                if nums[j] < nums[min_index]:
-                    min_index = j
+        left, right = 0, len(nums) - 1
+        curr = 0
 
-            nums[min_index], nums[i] = nums[i], nums[min_index]
+        while curr <= right:
+            if nums[curr] == 0:
+                nums[left], nums[curr] = nums[curr], nums[left]
+                left += 1
+                curr += 1
+            elif nums[curr] == 2:
+                nums[curr], nums[right] = nums[right], nums[curr]
+                right -= 1
+            else:
+                curr += 1
